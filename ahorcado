@@ -1,0 +1,213 @@
+# -*- coding: utf-8 -*-
+import random
+
+IMAGES = ['''
+
++---+
+  |   |
+      |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========''','''
+''']
+
+WORDS = [
+'kill bill',
+'django',
+'bastardos sin glora',
+'pulp fiction',
+'fight club',
+'mi vecino totoro',
+'el viaje de Chihiro',
+'los ocho mas odiados',
+'snatch',
+'el lobo de wall street',
+'buenos muchachos',
+'hardcore, mision extrema',
+'gran torino',
+'jackie brown',
+'batman, el caballero de la noche',
+'batman, el caballero de la noche asciende',
+'batman v superman',
+'batman inicia',
+'la mujer maravilla',
+'los guardianes de la galaxia',
+'requiem for a dream',
+'pi',
+'el cuarto contacto',
+'the martian',
+'interestelar',
+'apolo dieciocho',
+'coraline',
+'toy story',
+'monsters inc',
+'monsters university',
+'grandes heroes',
+'el juego perfecto',
+'the shinning',
+'el juego de gerald',
+'el juego de ender',
+'cementerio maldito',
+'it',
+'guerra mundial z',
+'justice league',
+'la playa',
+'trainspotting',
+'loco y estupido amor',
+'a el no le gustas tanto',
+'mean girls',
+'cartas a julieta',
+'psycho',
+'psicosis',
+'la ventana indiscreta',
+'little boy',
+'cujo',
+'misery',
+'riding the bullet',
+'the black tower',
+'wallie',
+'coco',
+'zootopia',
+'el libro de la selva',
+'mujer bonita',
+'la vida de calabacin',
+'rocky balboa',
+'creed',
+'los pajaros',
+'los indestructibles',
+'terminator',
+'contacto sangriento',
+'ip man',
+'operacion dragon',
+'el juego de la muerte',
+'alicia en el pais de las maravillas',
+'mente indomable',
+'el protegido',
+'sexto sentido',
+'señales',
+'los otros',
+'fragmentado',
+'corpse bride',
+'big fish',
+'charlie y la fabrica de chocolates',
+'nine',
+'el hombre manos de tijera',
+'the nightmare before christmas',
+'los increibles',
+'el dia despues de mañana',
+'chucky',
+'pollitos en fuga',
+'los extraños',
+'la risa en vacaciones',
+'rapido y furioso',
+'rush',
+'top gun',
+'ojos bien cerrados',
+'watchmen',
+'immortals',
+'star strek',
+'stars wars',
+'encantada',
+'pandillas de nueva york',
+'la guarderia de papa',
+'los pequeños traviesos',
+'el gato con botas',
+'sin city'
+]
+
+def random_word():
+    idx = random.randint(0, len(WORDS) - 1)
+    return WORDS[idx]
+
+def display_board(hidden_word, tries):
+    print(IMAGES[tries])
+    print ('')
+    print (hidden_word)
+    print (' --- * --- * --- * --- * --- * --- * --- * --- * --- ')
+
+def run():
+    word = random_word()
+    hidden_word = ['-'] * len(word)
+    tries = 0
+
+def display_board(hidden_word, try_num, letters_used):#Funcion que muestra la imagen, las letras usadas y la palabra oculta
+    print IMAGES[try_num] + ' Letters used: {}'.format(letters_used) + '\n'
+    print hidden_word
+    print ('--- * --- * --- * --- * --- * --- * --- * --- * --- * --- * --- * --- * --- )
+
+    while True:
+        display_board(hidden_word, tries)
+        current_letter = str(raw_input('Presiona una letra: '))
+
+        letter_indexes = []
+        for i in range(len(word)):
+            if word[i] == current_letter:
+                letter_indexes.append(idx)
+
+        if len(letter_indexes) == 0:
+            tries += 1
+
+            if tries == 7:
+                display_board(hidden_word, tries)
+                print ('')
+                print ('¡you are a loser, baby. Inténtalo otra vez! El titulo era {}'. format(word))
+                break
+        else:
+            for idx in letter_indexes:
+                hidden_word[idx] = current_letter
+
+            letter_indexes = []
+
+        try:
+            hidden_word.index('-')
+        except ValueError:
+            print('')
+            print('¡Te cagaste!. Pero para mi sigues siendo un chamaco cagon. Titulo {}'.format(word))
+            break
+
+if __name__ == '__main__':
+    print('welcome, te vas ahorcar')
+    run()
